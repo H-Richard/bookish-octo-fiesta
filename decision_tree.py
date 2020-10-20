@@ -4,6 +4,7 @@ B. Chan, E. Franco, D. Fleet
 """
 
 import numpy as np
+from math import log2
 
 class DecisionTree:
     def __init__(self,
@@ -65,10 +66,10 @@ class DecisionTree:
         (counts, _) = np.histogram(y, bins=np.arange(self.num_classes + 1))
 
         # ====================================================
-        # TODO: Implement your solution within the box
-        # Set the entropy of the unnormalized categorical distribution counts
-        # Make sure the case where p_i = 0 is handeled appropriately.
-        
+        total = np.sum(counts)
+        plogp = lambda x: 0 if x/total == 0  else -1 *  (x / total) * log2(x / total)
+        vectorized_plogp = np.vectorize(plogp)
+        return np.sum(vectorized_plogp(y))
         # ====================================================
 
         return entropy
