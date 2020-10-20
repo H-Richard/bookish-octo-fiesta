@@ -107,18 +107,30 @@ class DecisionTree:
         # ====================================================
         # TODO: Implement your solution within the box
         # Initialize variables
+        maximum_information_gain = 0
+        split_value = unique_values[0]
 
         # Iterate over possible split values and find optimal split that maximizes the information gain.
         for ii in range(unique_values.shape[0] - 1):
             # Split data by split value and compute information gain
-            pass # TODO: Remove this line and implement.
+            current_split_index = first_idxes[ii + 1]
+            current_split_value = unique_values[ii]
+            
+            left_nodes = y[:current_split_index]
+            right_nodes = y[current_split_index:]
+
+            H_l = self._entropy(left_nodes)
+            H_r = self._entropy(right_nodes)
+
+            current_information_gain = H_data - (len(left_nodes) * H_l / N) -  (len(right_nodes) * H_r / N)
             
             if self.debug:
                 print(f"split (index, value): ({current_split_index}, {current_split_value}), H_data: {H_data}, H_left: {H_left}, H_right: {H_right}, Info Gain: {current_information_gain}")
 
             # Update maximum information gain when applicable
             if current_information_gain >= maximum_information_gain:
-                pass # TODO: Remove this line and implement.
+                maximum_information_gain = current_information_gain
+                split_value = current_split_value
         
         # ====================================================
 
