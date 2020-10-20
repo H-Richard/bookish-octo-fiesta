@@ -1,0 +1,13 @@
+"""
+CSCC11 - Introduction to Machine Learning, Fall 2020, Assignment 2
+B. Chan, E. Franco, D. Fleet
+"""
+
+1. Is a single DT prone to over-fitting with the occupancy dataset?
+
+
+2. How does classification accuracy behave as a function of the number of trees?
+
+
+3. Do you think the random forest was helpful?  Explain.
+
