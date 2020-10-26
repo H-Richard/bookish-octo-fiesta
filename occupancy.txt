@@ -5,9 +5,14 @@ B. Chan, E. Franco, D. Fleet
 
 1. Is a single DT prone to over-fitting with the occupancy dataset?
 
+Yes, upon running occupancy with 1 tree, regardless of other params, often there will be seeds that yield an incredibly low Test Accuracy with an extremely high train accuracy.
+This is especially apparent when running occupancy with min_entropy as something such as 0.1, 
+Seed: 30403 yields: Train Accuracy: [99.42281714] - Validation Accuracy: [91.70731707] - Test Accuracy: [56.38843314]
 
 2. How does classification accuracy behave as a function of the number of trees?
 
+Classification accuracy goes up as number of trees grows. This curve has high resemblence to something like f(x) = -1/x.
 
 3. Do you think the random forest was helpful?  Explain.
 
+Absolutely, since single DT is prone to over-fitting, random forest helps solve this problem.

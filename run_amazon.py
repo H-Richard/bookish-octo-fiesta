@@ -64,5 +64,5 @@ def main(final_hyperparameters):
 
 
 if __name__ == "__main__":
-    final_hyperparameters = False
+    final_hyperparameters = True
     main(final_hyperparameters=final_hyperparameters)

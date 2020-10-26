@@ -4,8 +4,6 @@ B. Chan, E. Franco, D. Fleet
 """
 
 import numpy as np
-from math import log2
-
 class DecisionTree:
     def __init__(self,
                  num_classes=2,
@@ -66,10 +64,13 @@ class DecisionTree:
         (counts, _) = np.histogram(y, bins=np.arange(self.num_classes + 1))
 
         # ====================================================
+        entropy = 0
         total = np.sum(counts)
-        plogp = lambda x: 0 if x/total == 0  else -1 *  (x / total) * log2(x / total)
-        vectorized_plogp = np.vectorize(plogp)
-        return np.sum(vectorized_plogp(y))
+        for i in counts:
+            if i == 0:
+                continue
+            p_i = i / total
+            entropy -= p_i * np.log2(p_i)
         # ====================================================
 
         return entropy
@@ -105,8 +106,6 @@ class DecisionTree:
         (unique_values, first_idxes) = np.unique(X[:, split_dim], return_index=True)
 
         # ====================================================
-        # TODO: Implement your solution within the box
-        # Initialize variables
         maximum_information_gain = 0
         split_value = unique_values[0]
 

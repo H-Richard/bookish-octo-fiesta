@@ -74,7 +74,7 @@ class RandomForest:
         """
         assert len(X.shape) == 2, f"X should be a matrix. Got: {X.shape} tensor."
         assert X.shape[0] == y.shape[0], f"X and y should have same number of data (X: {X.shape[0]}, y: {y.shape[0]})."
-        assert y.shape[1] == 1, f"y should be a column-vector. Got: {y.shape}."
+        assert y.shape[1] == 1, f"y should be a co  lumn-vector. Got: {y.shape}."
         (N, D) = X.shape
 
         num_features_per_tree = int(np.ceil(self.features_percent * D))
@@ -91,7 +91,13 @@ class RandomForest:
             # Sample subset of data and features.
             # X_sub, y_sub: selected rows and columns of X, y.
             # NOTE: Use self.rng.permutation to permute features and data.
-            
+
+            data_ids = self.rng.permutation(N)[:num_data_per_tree]
+            feat_ids = self.rng.permutation(D)[:num_features_per_tree]
+            X_sub = X
+            X_sub = X_sub[data_ids, :]
+            X_sub = X_sub[:, feat_ids]
+            y_sub = y[data_ids]
             # ====================================================
 
             model = DecisionTree(num_classes=self.num_classes,
